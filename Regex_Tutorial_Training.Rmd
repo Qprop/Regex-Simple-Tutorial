@@ -112,3 +112,6 @@ str_extract_all(spe_exa,"\\|")
 
 Notice that we have `\\|` this is an escaping character `\` we are instructing the machine that this to exempt this particular symbol `|` is not the syntaxical command `or` symbol
 
+***
+
+Now lets get our hands dirty with indepth practical examples.
