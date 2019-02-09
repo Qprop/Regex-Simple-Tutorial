@@ -118,4 +118,38 @@ Now lets get our hands dirty with indepth practical examples.
 
 We can find very interesting addins for RStudio that can help with regex [RegEx Addin](https://mobile.twitter.com/rstudiotips/status/1093938376762261504), Though I would shy away from this. :-)
 
+***
+#4. Example workings
 
+Import exercise 1.txt
+
+```{R}
+library(stringr)
+exercise_1 <- read.table("Exercise 1.txt", sep = "\t")
+head(exercise_1,n = 10)
+
+exercise_1 <- str_replace_all(exercise_1$V1,"\\<|\\>|,","")
+
+exercise_1 <- str_replace_all(exercise_1,"@"," ")
+
+exercise_1 <- str_replace_all(exercise_1,"\\.c"," c")
+exercise_1_2 <- str_split(exercise_1," ", simplify = T)
+
+
+write.table(exercise_1_2,"Exercise Ok.txt")
+write.csv(exercise_1_2,"Exercise Ok.csv")
+
+```
+
+***
+Using G-Suite base syntax
+
+```{R}
+
+exercise_1_0 <- read.table("Exercise 1.txt", sep = "\t")
+
+exercise_1_0 <- gsub("<|>|,"," ",exercise_1_0$V1)
+exercise_1_0 <- gsub("@"," ",exercise_1_0)
+exercise_1_0 <- gsub("\\.c"," c",exercise_1_0)
+
+```

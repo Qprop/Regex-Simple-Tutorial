@@ -590,6 +590,44 @@ Email: <a href="mailto:briankiprop08@gmail.com" class="email">briankiprop08@gmai
 <p>Now lets get our hands dirty with indepth practical examples.</p>
 <p>We can find very interesting addins for RStudio that can help with regex <a href="https://mobile.twitter.com/rstudiotips/status/1093938376762261504">RegEx Addin</a>, Though I would shy away from this. :-)</p>
 </div>
+<div class="slide section level1">
+
+<p>#4. Example workings</p>
+<p>Import exercise 1.txt</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">library</span>(stringr)</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">exercise_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;Exercise 1.txt&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="kw">head</span>(exercise_<span class="dv">1</span>,<span class="dt">n =</span> <span class="dv">10</span>)</a></code></pre></div>
+<pre><code>##                                               V1
+## 1         Okuda Pascal &lt;anderapascal@gmail.com&gt;,
+## 2          Eunice Mutahi &lt;wacumutahi@gmail.com&gt;,
+## 3     Denis Mwaniki &lt;denis.mwaniki@dalberg.com&gt;,
+## 4         Steve Bicko &lt;steve.bicko@dalberg.com&gt;,
+## 5  teresiah karumba &lt;teresiahkarumba@gmail.com&gt;,
+## 6              BICKO CYGU &lt;cygubicko@gmail.com&gt;,
+## 7            rehema ouko &lt;rehemaouko@gmail.com&gt;,
+## 8    Mercy Macharia &lt;wangechi.mercym@gmail.com&gt;,
+## 9    emmanuel owino &lt;emmanuelowino89@gmail.com&gt;,
+## 10     Dorcas Wasike &lt;dorcaswasikedw@gmail.com&gt;,</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">exercise_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">str_replace_all</span>(exercise_<span class="dv">1</span><span class="op">$</span>V1,<span class="st">&quot;</span><span class="ch">\\</span><span class="st">&lt;|</span><span class="ch">\\</span><span class="st">&gt;|,&quot;</span>,<span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb15-3" data-line-number="3">exercise_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">str_replace_all</span>(exercise_<span class="dv">1</span>,<span class="st">&quot;@&quot;</span>,<span class="st">&quot; &quot;</span>)</a>
+<a class="sourceLine" id="cb15-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb15-5" data-line-number="5">exercise_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">str_replace_all</span>(exercise_<span class="dv">1</span>,<span class="st">&quot;</span><span class="ch">\\</span><span class="st">.c&quot;</span>,<span class="st">&quot; c&quot;</span>)</a>
+<a class="sourceLine" id="cb15-6" data-line-number="6">exercise_<span class="dv">1</span>_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">str_split</span>(exercise_<span class="dv">1</span>,<span class="st">&quot; &quot;</span>, <span class="dt">simplify =</span> T)</a>
+<a class="sourceLine" id="cb15-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb15-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb15-9" data-line-number="9"><span class="kw">write.table</span>(exercise_<span class="dv">1</span>_<span class="dv">2</span>,<span class="st">&quot;Exercise Ok.txt&quot;</span>)</a>
+<a class="sourceLine" id="cb15-10" data-line-number="10"><span class="kw">write.csv</span>(exercise_<span class="dv">1</span>_<span class="dv">2</span>,<span class="st">&quot;Exercise Ok.csv&quot;</span>)</a></code></pre></div>
+</div>
+<div class="slide section level1">
+
+<p>Using G-Suite base syntax</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">exercise_<span class="dv">1</span>_<span class="dv">0</span> &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;Exercise 1.txt&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb16-3" data-line-number="3">exercise_<span class="dv">1</span>_<span class="dv">0</span> &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&quot;&lt;|&gt;|,&quot;</span>,<span class="st">&quot; &quot;</span>,exercise_<span class="dv">1</span>_<span class="dv">0</span><span class="op">$</span>V1)</a>
+<a class="sourceLine" id="cb16-4" data-line-number="4">exercise_<span class="dv">1</span>_<span class="dv">0</span> &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&quot;@&quot;</span>,<span class="st">&quot; &quot;</span>,exercise_<span class="dv">1</span>_<span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb16-5" data-line-number="5">exercise_<span class="dv">1</span>_<span class="dv">0</span> &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">.c&quot;</span>,<span class="st">&quot; c&quot;</span>,exercise_<span class="dv">1</span>_<span class="dv">0</span>)</a></code></pre></div>
+</div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
   <script>
