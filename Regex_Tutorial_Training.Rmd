@@ -115,3 +115,7 @@ Notice that we have `\\|` this is an escaping character `\` we are instructing t
 ***
 
 Now lets get our hands dirty with indepth practical examples.
+
+We can find very interesting addins for RStudio that can help with regex [RegEx Addin](https://mobile.twitter.com/rstudiotips/status/1093938376762261504), Though I would shy away from this. :-)
+
+
