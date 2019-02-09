@@ -1,0 +1,114 @@
+---
+title: "REGULAR EXPRESSION(REGEX) INTRODUCTION \n\n\n\n AT R SATURDAY MEET UP"
+author: "Brian Kiprop\n\n Email: briankiprop08@gmail.com"
+date: "Saturday 9th 2019"
+output: slidy_presentation
+toc: FALSE
+---
+
+***
+# 1. Introduction
+
+What is __Regular Expression__ *a.k.a* __RegEx__ , an attempt to define this is at times makes the tool use under explained or overly complicated. Though let me try __RegEx__ in simple terms is a way of handling and manipulating characters in ways different ways while simplying the effort of the process.
+
+***
+
+We use __RegEx__ on a daily basis it is just that we do not know areas where we use are below:
+
+When using search and find
+
+- Most of us have searched words in word documents excel, the process in which this applications are able to search apply __RegEx__ expressions at the background
+ 
+When creating passwords
+
+- We find ourselves when creating passwords being told we need special characters, capitalized letter, numerics and lower case letters. How does the system know when you have not been able to put all this into the password. Very thought provocative I would say.
+
+***
+
+# 2. Tenents of RegEx
+
+__RegEx__ really on key concepts that make it work:
+
+Rule               | Explanation  
+-------------------|--------------------------------------------
+Character Matching |- Being able to locating alphabetic characters e.g. `ABCDEF..`
+Numerical Matching |- Locating numerals e.g. `123-456`
+Special Character Matching |- Locating special characters e.g. `$#@!`
+****
+
+## i) Character Matching
+
+What happens when we want to find a certain character in a text. Lets get our hands dirty.
+
+```{r}
+ex_text <- c("The","fat","cat","sat on the mat")
+grep("at",ex_text, value = TRUE)
+
+```
+
+What you will notice the output picks words that have `at` any where on the string vector `ex_text`
+
+Am a proponent of [Tidyverse](http://https://www.tidyverse.org) packages, this are the likes of *tidyr, dplyr, stringr etc*
+
+***
+
+One of my favourite stingr manipulation library is [stringr](https://stringr.tidyverse.org/), it has easy understanding of syntax. Let use the example we had previously
+
+```{R}
+library(stringr)
+
+ex_text <- c("The","fat","cat","sat on the mat")
+str_detect(ex_text,"at")
+ex_text[str_detect(ex_text,"at")]
+
+```
+
+You will notice from `str_detect(ex_text,"at")` that we get logical values `TRUE` shows elements in the vector that match will `FALSE` is the opposite.
+
+***
+
+But at times we want to pick alphabetic characters from a text with mixed characters. How can we do this? Before we talk about that I will introduce  `meta characters` that are very important.
+
+Meta Character                 |  Explanation
+-------------------------------|-------------------------------------------
+`.`                            | A period is used to connote any instance of a single character
+`[]`                           | Square brackets are used to give ranges both Alphabets and Numerics
+`*`                            | Match multiple characters 0 or more times
+`+`                            | Match multiple characters 1 or more times
+`?`                            | The next character or instance is optional
+`{n,m}`                        | Matches a character at least `n` times and not more than `m` times
+`(xyz)`                        | Match the exact characters
+`|`                            | Defacto logic for `or` pick any
+`\`                            | Escaping characters, when you want to mean special characters are part of the text and this special characters are part of __RegEx__ commands
+`^`                            | Matches the start of a statement or  Word
+`$`                            | Matches the end of a statement or word
+
+***
+## ii) Numerical Matching
+
+At times we want to pick numbers from a list of characters. Let us try. We will start using `stringr` moving forward
+
+```{R}
+num_ex <- "My name is 123 what is456"
+str_extract_all(num_ex,"[0-9]")
+```
+
+Notice how we have used `[0-9]` what this is doing it is matching a range of numbers from `0` to `9`. If we want specific numbers we place the numbers directly.
+
+```{R}
+num_ex <- "My name is 123 what is456"
+str_extract(num_ex,"23")
+```
+
+***
+## iii) Special Character Matching
+
+And what if we want to get special characters `!@#$`. Lets do this
+
+```{R}
+spe_exa <- c("M@ !| Bri@n")
+str_extract_all(spe_exa,"\\|")
+```
+
+Notice that we have `\\|` this is an escaping character `\` we are instructing the machine that this to exempt this particular symbol `|` is not the syntaxical command `or` symbol
+

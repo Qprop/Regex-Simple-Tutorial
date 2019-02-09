@@ -1,0 +1,399 @@
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[ignorenonframetext,]{beamer}
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% Prevent slide breaks in the middle of a paragraph:
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+\centering
+\begin{beamercolorbox}[sep=16pt,center]{part title}
+  \usebeamerfont{part title}\insertpart\par
+\end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+\centering
+\begin{beamercolorbox}[sep=12pt,center]{part title}
+  \usebeamerfont{section title}\insertsection\par
+\end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+\centering
+\begin{beamercolorbox}[sep=8pt,center]{part title}
+  \usebeamerfont{subsection title}\insertsubsection\par
+\end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
+\else % if luatex or xelatex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\usepackage{hyperref}
+\hypersetup{
+            pdftitle={REGULAR EXPRESSION(REGEX) INTRODUCTION},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\newif\ifbibliography
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs}
+\usepackage{caption}
+% These lines are needed to make table captions work with longtable:
+\makeatletter
+\def\fnum@table{\tablename~\thetable}
+\makeatother
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+
+\title{REGULAR EXPRESSION(REGEX) INTRODUCTION}
+\date{}
+
+\begin{document}
+\frame{\titlepage}
+
+\begin{frame}{1. Introduction}
+\protect\hypertarget{introduction}{}
+
+What is \textbf{Regular Expression} \emph{a.k.a} \textbf{RegEx} , an
+attempt to define this is at times makes the tool use under explained or
+overly complicated. Though let me try \textbf{RegEx} in simple terms is
+a way of handling and manipulating characters in ways different ways
+while simplying the effort of the process.
+
+\end{frame}
+
+\begin{frame}
+
+We use \textbf{RegEx} on a daily basis it is just that we do not know
+areas where we use are below:
+
+When using search and find
+
+\begin{itemize}
+\tightlist
+\item
+  Most of us have searched words in word documents excel, the process in
+  which this applications are able to search apply \textbf{RegEx}
+  expressions at the background
+\end{itemize}
+
+When creating passwords
+
+\begin{itemize}
+\tightlist
+\item
+  We find ourselves when creating passwords being told we need special
+  characters, capitalized letter, numerics and lower case letters. How
+  does the system know when you have not been able to put all this into
+  the password. Very thought provocative I would say.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{2. Tenents of RegEx}
+\protect\hypertarget{tenents-of-regex}{}
+
+\textbf{RegEx} really on key concepts that make it work:
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.28\columnwidth}\raggedright
+Rule\strut
+\end{minipage} & \begin{minipage}[b]{0.66\columnwidth}\raggedright
+Explanation\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.28\columnwidth}\raggedright
+Character Matching\strut
+\end{minipage} & \begin{minipage}[t]{0.66\columnwidth}\raggedright
+- Being able to locating alphabetic characters e.g.
+\texttt{ABCDEF..}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.28\columnwidth}\raggedright
+Numerical Matching\strut
+\end{minipage} & \begin{minipage}[t]{0.66\columnwidth}\raggedright
+- Locating numerals e.g. \texttt{123-456}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.28\columnwidth}\raggedright
+Special Character Matching\strut
+\end{minipage} & \begin{minipage}[t]{0.66\columnwidth}\raggedright
+- Locating special characters e.g. \texttt{\$\#@!}\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\end{frame}
+
+\begin{frame}[fragile]
+
+\begin{block}{i) Character Matching}
+
+What happens when we want to find a certain character in a text. Lets
+get our hands dirty.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ex_text <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"The"}\NormalTok{,}\StringTok{"fat"}\NormalTok{,}\StringTok{"cat"}\NormalTok{,}\StringTok{"sat on the mat"}\NormalTok{)}
+\KeywordTok{grep}\NormalTok{(}\StringTok{"at"}\NormalTok{,ex_text, }\DataTypeTok{value =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "fat"            "cat"            "sat on the mat"
+\end{verbatim}
+
+What you will notice the output picks words that have \texttt{at} any
+where on the string vector \texttt{ex\_text}
+
+Am a proponent of \href{http://https://www.tidyverse.org}{Tidyverse}
+packages, this are the likes of \emph{tidyr, dplyr, stringr etc}
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]
+
+One of my favourite stingr manipulation library is
+\href{https://stringr.tidyverse.org/}{stringr}, it has easy
+understanding of syntax. Let use the example we had previously
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(stringr)}
+
+\NormalTok{ex_text <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"The"}\NormalTok{,}\StringTok{"fat"}\NormalTok{,}\StringTok{"cat"}\NormalTok{,}\StringTok{"sat on the mat"}\NormalTok{)}
+\KeywordTok{str_detect}\NormalTok{(ex_text,}\StringTok{"at"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] FALSE  TRUE  TRUE  TRUE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ex_text[}\KeywordTok{str_detect}\NormalTok{(ex_text,}\StringTok{"at"}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "fat"            "cat"            "sat on the mat"
+\end{verbatim}
+
+You will notice from \texttt{str\_detect(ex\_text,"at")} that we get
+logical values \texttt{TRUE} shows elements in the vector that match
+will \texttt{FALSE} is the opposite.
+
+\end{frame}
+
+\begin{frame}[fragile]
+
+But at times we want to pick alphabetic characters from a text with
+mixed characters. How can we do this? Before we talk about that I will
+introduce \texttt{meta\ characters} that are very important.
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.39\columnwidth}\raggedright
+Meta Character\strut
+\end{minipage} & \begin{minipage}[b]{0.55\columnwidth}\raggedright
+Explanation\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.39\columnwidth}\raggedright
+\texttt{.}\strut
+\end{minipage} & \begin{minipage}[t]{0.55\columnwidth}\raggedright
+A period is used to connote any instance of a single character\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.39\columnwidth}\raggedright
+\texttt{{[}{]}}\strut
+\end{minipage} & \begin{minipage}[t]{0.55\columnwidth}\raggedright
+Square brackets are used to give ranges both Alphabets and
+Numerics\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.39\columnwidth}\raggedright
+\texttt{*}\strut
+\end{minipage} & \begin{minipage}[t]{0.55\columnwidth}\raggedright
+Match multiple characters 0 or more times\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.39\columnwidth}\raggedright
+\texttt{+}\strut
+\end{minipage} & \begin{minipage}[t]{0.55\columnwidth}\raggedright
+Match multiple characters 1 or more times\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.39\columnwidth}\raggedright
+\texttt{?}\strut
+\end{minipage} & \begin{minipage}[t]{0.55\columnwidth}\raggedright
+The next character or instance is optional\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.39\columnwidth}\raggedright
+\texttt{\{n,m\}}\strut
+\end{minipage} & \begin{minipage}[t]{0.55\columnwidth}\raggedright
+Matches a character at least \texttt{n} times and not more than
+\texttt{m} times\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.39\columnwidth}\raggedright
+\texttt{(xyz)}\strut
+\end{minipage} & \begin{minipage}[t]{0.55\columnwidth}\raggedright
+Match the exact characters\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.39\columnwidth}\raggedright
+\texttt{\textbar{}}\strut
+\end{minipage} & \begin{minipage}[t]{0.55\columnwidth}\raggedright
+Defacto logic for \texttt{or} pick any\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.39\columnwidth}\raggedright
+\texttt{\textbackslash{}}\strut
+\end{minipage} & \begin{minipage}[t]{0.55\columnwidth}\raggedright
+Escaping characters, when you want to mean special characters are part
+of the text and this special characters are part of \textbf{RegEx}
+commands\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.39\columnwidth}\raggedright
+\texttt{\^{}}\strut
+\end{minipage} & \begin{minipage}[t]{0.55\columnwidth}\raggedright
+Matches the start of a statement or Word\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.39\columnwidth}\raggedright
+\texttt{\$}\strut
+\end{minipage} & \begin{minipage}[t]{0.55\columnwidth}\raggedright
+Matches the end of a statement or word\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\end{frame}
+
+\begin{frame}[fragile]
+
+This is an \href{http://rmarkdown.rstudio.com}{R Markdown} Notebook.
+When you execute code within the notebook, the results appear beneath
+the code.
+
+Try executing this chunk by clicking the \emph{Run} button within the
+chunk or by placing your cursor inside it and pressing
+\emph{Ctrl+Shift+Enter}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(cars)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Regex_Tutorial_Training_files/figure-beamer/unnamed-chunk-3-1.pdf}
+
+Add a new chunk by clicking the \emph{Insert Chunk} button on the
+toolbar or by pressing \emph{Ctrl+Alt+I}.
+
+When you save the notebook, an HTML file containing the code and output
+will be saved alongside it (click the \emph{Preview} button or press
+\emph{Ctrl+Shift+K} to preview the HTML file).
+
+The preview shows you a rendered HTML copy of the contents of the
+editor. Consequently, unlike \emph{Knit}, \emph{Preview} does not run
+any R code chunks. Instead, the output of the chunk when it was last run
+in the editor is displayed.
+
+\end{frame}
+
+\begin{frame}
+
+\end{frame}
+
+\end{document}
